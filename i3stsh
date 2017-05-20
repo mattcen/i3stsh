@@ -10,15 +10,15 @@ do
     # run12 commands first
     if [ "$run12" == "0" ]
     then
-        export essid=`iwconfig wlp3s0 | awk -F '"' '/ESSID/ {print $2}'`
-        export strength=`nmcli -t -f active,ssid,signal dev wifi|grep yes|cut -d':' -f3`
-        export vpn_state=`nmcli | grep "tun0: connected to tun0"`
-        export doy=`date "+%j"`
-        export date=`date "+%F"`
+        essid="`iwconfig wlp3s0 | awk -F '"' '/ESSID/ {print $2}'`"
+        strength="`nmcli -t -f active,ssid,signal dev wifi|grep yes|cut -d':' -f3`"
+        vpn_state="`nmcli | grep "tun0: connected to tun0"`"
+        doy="`date "+%j"`"
+        date="`date "+%F"`"
     fi
-    export ti=`date "+%I:%M %p"`
-    export vol=`amixer -D pulse get Master | grep Left: | cut -d '[' -f2 | cut -d ']' -f1`
-    export mute=`amixer -D pulse get Master | grep Left: | cut -d '[' -f3 | cut -d ']' -f1`
+    ti="`date "+%I:%M %p"`"
+    vol="`amixer -D pulse get Master | grep Left: | cut -d '[' -f2 | cut -d ']' -f1`"
+    mute="`amixer -D pulse get Master | grep Left: | cut -d '[' -f3 | cut -d ']' -f1`"
 
     # WIFI:
     printf '{"name":"wifi","color":"#FFFFFF","full_text":"'"$essid"' '"$strength"'%%"},'
