@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# See LICENSE for how you can use this.
+
 echo '{"version":1}'
 echo '['
 run12=0
