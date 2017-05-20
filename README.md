@@ -15,7 +15,7 @@ cd ~/.local/bin/; wget -c https://raw.githubusercontent.com/cjbayliss/i3stsh/mas
 Next make it exucutible:
 
 ```
-chmod +x
+chmod +x ~/.local/bin/i3stsh
 ```
 
 Now change the config for i3wm to use `i3stsh`, e.g. in `~/.i3/config` replace
