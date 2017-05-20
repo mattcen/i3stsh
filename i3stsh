@@ -19,6 +19,7 @@ do
     ti="`date "+%I:%M %p"`"
     vol="`amixer -D pulse get Master | grep Left: | cut -d '[' -f2 | cut -d ']' -f1`"
     mute="`amixer -D pulse get Master | grep Left: | cut -d '[' -f3 | cut -d ']' -f1`"
+    bat="`upower -i $(upower -e | grep 'BAT') | grep -E "percentage" | cut -d':' -f2 | sed 's/ //g'`"
 
     # WIFI:
     printf '{"name":"wifi","color":"#FFFFFF","full_text":"'"$essid"' '"$strength"'%%"},'
@@ -40,15 +41,19 @@ do
     fi
 
     # DOY:
-    printf '{"name":"time","color":"#FF00FF","full_text":"DOY: '"$doy"'"},'
+    printf '{"name":"doy","color":"#FF00FF","full_text":"DOY: '"$doy"'"},'
 
     # DATE:
-    printf '{"name":"time","color":"#FFFFFF","full_text":"'"$date"'"},'
+    printf '{"name":"date","color":"#FFFFFF","full_text":"'"$date"'"},'
 
     # TIME:
-    printf '{"name":"time","color":"#00AAFF","full_text":"'"$ti"' "}'
-    printf "],\n"
+    printf '{"name":"time","color":"#00AAFF","full_text":"'"$ti"'"},'
 
+    # BATTERY
+    printf '{"name":"bat","color":"#FFFFFF","full_text":"'"$bat"'% "}'
+    
+
+    printf "],\n"
     # This whole run12 thing is we don't run some commands to often, but let the
     # time and other things run12 every seccond.
     if [ "$run12" == "11" ]
