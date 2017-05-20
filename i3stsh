@@ -1,0 +1,61 @@
+#!/bin/bash
+
+echo '{"version":1}'
+echo '['
+run60=0
+while [ 0 == 0 ]
+do
+    printf '['
+
+    # run60 commands first
+    if [ "$run60" == "0" ]
+    then
+        export essid=`iwconfig wlp3s0 | awk -F '"' '/ESSID/ {print $2}'`
+        export strength=`nmcli -t -f active,ssid,signal dev wifi|grep yes|cut -d':' -f3`
+        export vpn_state=`nmcli | grep "tun0: connected to tun0"`
+        export doy=`date "+%j"`
+        export date=`date "+%F"`
+    fi
+    export ti=`date "+%I:%M %p"`
+    export vol=`amixer -D pulse get Master | grep Left: | cut -d '[' -f2 | cut -d ']' -f1`
+    export mute=`amixer -D pulse get Master | grep Left: | cut -d '[' -f3 | cut -d ']' -f1`
+
+    # WIFI:
+    printf '{"name":"wifi","color":"#FFFFFF","full_text":"'"$essid"' '"$strength"'%%"},'
+
+    # VPN:
+    if [ "$vpn_state" == "tun0: connected to tun0" ]
+    then
+        printf '{"name":"vpn","color":"#00FF00","full_text":"VPN: YES"},'
+    else
+        printf '{"name":"vpn","color":"#FF0000","full_text":"VPN: NO"},'
+    fi
+
+    # VOLUME:
+    if [ "$mute" != "off" ]
+    then
+        printf '{"name":"vol","color":"#FFFFFF","full_text":"VOL: '"$vol"'%"},'
+    else
+        printf '{"name":"vol","color":"#FFFF00","full_text":"MUTED ('"$vol"'%)"},'
+    fi
+
+    # DOY:
+    printf '{"name":"time","color":"#FF00FF","full_text":"DOY: '"$doy"'"},'
+
+    # DATE:
+    printf '{"name":"time","color":"#FFFFFF","full_text":"'"$date"'"},'
+
+    # TIME:
+    printf '{"name":"time","color":"#00AAFF","full_text":"'"$ti"' "}'
+    printf "],\n"
+
+    # This whole run60 thing is we don't run some commands to often, but let the
+    # time and other things run60 every seccond.
+    if [ "$run60" == "29" ]
+    then
+        run60=0
+    else
+        run60=$((echo "$run"+1 | bc))
+    fi
+    sleep 2
+done
