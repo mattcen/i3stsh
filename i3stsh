@@ -2,13 +2,13 @@
 
 echo '{"version":1}'
 echo '['
-run60=0
+run12=0
 while [ 0 == 0 ]
 do
     printf '['
 
-    # run60 commands first
-    if [ "$run60" == "0" ]
+    # run12 commands first
+    if [ "$run12" == "0" ]
     then
         export essid=`iwconfig wlp3s0 | awk -F '"' '/ESSID/ {print $2}'`
         export strength=`nmcli -t -f active,ssid,signal dev wifi|grep yes|cut -d':' -f3`
@@ -49,13 +49,13 @@ do
     printf '{"name":"time","color":"#00AAFF","full_text":"'"$ti"' "}'
     printf "],\n"
 
-    # This whole run60 thing is we don't run some commands to often, but let the
-    # time and other things run60 every seccond.
-    if [ "$run60" == "29" ]
+    # This whole run12 thing is we don't run some commands to often, but let the
+    # time and other things run12 every seccond.
+    if [ "$run12" == "11" ]
     then
-        run60=0
+        run12=0
     else
-        run60=$((echo "$run"+1 | bc))
+        run12=$((echo "$run"+1 | bc))
     fi
-    sleep 2
+    sleep 5
 done
