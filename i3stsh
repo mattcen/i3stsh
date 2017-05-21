@@ -27,7 +27,7 @@ do
     printf '{"name":"wifi","color":"#FFFFFF","full_text":"%s %s%%"},' "$essid" "$strength"
 
     # VPN:
-    if [ "$vpn_state" == "tun0: connected to tun0" ]
+    if [[ $vpn_state = "tun0: connected to tun0" ]]
     then
         printf '{"name":"vpn","color":"#00FF00","full_text":"VPN: YES"},'
     else
@@ -35,7 +35,7 @@ do
     fi
 
     # VOLUME:
-    if [ "$mute" != "off" ]
+    if [[ $mute != "off" ]]
     then
         printf '{"name":"vol","color":"#FFFFFF","full_text":"VOL: %s%"},' "$vol"
     else
