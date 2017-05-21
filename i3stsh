@@ -37,9 +37,9 @@ do
     # VOLUME:
     if [ "$mute" != "off" ]
     then
-        printf '{"name":"vol","color":"#FFFFFF","full_text":"VOL: '"$vol"'%"},'
+        printf '{"name":"vol","color":"#FFFFFF","full_text":"VOL: '"$vol"'%%"},'
     else
-        printf '{"name":"vol","color":"#FFFF00","full_text":"MUTED ('"$vol"'%)"},'
+        printf '{"name":"vol","color":"#FFFF00","full_text":"MUTED ('"$vol"'%%)"},'
     fi
 
     # DOY:
@@ -52,7 +52,7 @@ do
     printf '{"name":"time","color":"#00AAFF","full_text":"'"$ti"'"},'
 
     # BATTERY
-    printf '{"name":"bat","color":"#FFFFFF","full_text":"'"$bat"'% "}'
+    printf '{"name":"bat","color":"#FFFFFF","full_text":"'"$bat"'%% "}'
     
 
     printf "],\n"
