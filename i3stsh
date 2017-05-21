@@ -10,7 +10,7 @@ do
     printf '['
 
     # counter commands first
-    if [ "$counter" == "0" ]
+    if (( counter == 0 ))
     then
         essid=$(iwconfig wlp3s0 | awk -F '"' '/ESSID/ {print $2}')
         strength=$(nmcli -t -f active,ssid,signal dev wifi|grep yes|cut -d':' -f3)
@@ -58,11 +58,11 @@ do
     printf "],\n"
     # This whole counter thing is we don't run some commands to often
     # (~30secs), but let the time and other things counter every seccond.
-    if [ "$counter" -lt "6" ]
+    if (( counter < 6 ))
     then
-        let counter=$counter+1
+      (( counter++ ))
     else
-        counter=0
+      counter=0
     fi
     sleep 5
 done
