@@ -53,7 +53,7 @@ do
 
     # BATTERY
     printf '{"name":"bat","color":"#FFFFFF","full_text":"%s% "}' "$bat"
-    
+
 
     printf "],\n"
     # This whole counter thing is we don't run some commands to often
