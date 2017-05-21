@@ -5,7 +5,7 @@
 echo '{"version":1}'
 echo '['
 counter=0
-while [ 0 == 0 ]
+while true
 do
     printf '['
 
