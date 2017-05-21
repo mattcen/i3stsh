@@ -24,7 +24,7 @@ do
     bat=$(upower -i $(upower -e | grep 'BAT') | grep -E "percentage" | cut -d':' -f2 | sed 's/ //g')
 
     # WIFI:
-    printf '{"name":"wifi","color":"#FFFFFF","full_text":"'"$essid"' '"$strength"'%%"},'
+    printf '{"name":"wifi","color":"#FFFFFF","full_text":"%s %s%%"},' "$essid" "$strength"
 
     # VPN:
     if [ "$vpn_state" == "tun0: connected to tun0" ]
@@ -37,22 +37,22 @@ do
     # VOLUME:
     if [ "$mute" != "off" ]
     then
-        printf '{"name":"vol","color":"#FFFFFF","full_text":"VOL: '"$vol"'%%"},'
+        printf '{"name":"vol","color":"#FFFFFF","full_text":"VOL: %s%"},' "$vol"
     else
-        printf '{"name":"vol","color":"#FFFF00","full_text":"MUTED ('"$vol"'%%)"},'
+        printf '{"name":"vol","color":"#FFFF00","full_text":"MUTED (%s%)"},' "$vol"
     fi
 
     # DOY:
-    printf '{"name":"doy","color":"#FF00FF","full_text":"DOY: '"$doy"'"},'
+    printf '{"name":"doy","color":"#FF00FF","full_text":"DOY: %s"},' "$doy"
 
     # DATE:
-    printf '{"name":"date","color":"#FFFFFF","full_text":"'"$date"'"},'
+    printf '{"name":"date","color":"#FFFFFF","full_text":"%s"},' "$date"
 
     # TIME:
-    printf '{"name":"time","color":"#00AAFF","full_text":"'"$ti"'"},'
+    printf '{"name":"time","color":"#00AAFF","full_text":"%s"},' "$ti"
 
     # BATTERY
-    printf '{"name":"bat","color":"#FFFFFF","full_text":"'"$bat"'%% "}'
+    printf '{"name":"bat","color":"#FFFFFF","full_text":"%s% "}' "$bat"
     
 
     printf "],\n"
