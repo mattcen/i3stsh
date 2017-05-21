@@ -12,16 +12,16 @@ do
     # counter commands first
     if [ "$counter" == "0" ]
     then
-        essid="`iwconfig wlp3s0 | awk -F '"' '/ESSID/ {print $2}'`"
-        strength="`nmcli -t -f active,ssid,signal dev wifi|grep yes|cut -d':' -f3`"
-        vpn_state="`nmcli | grep "tun0: connected to tun0"`"
-        doy="`date "+%j"`"
-        date="`date "+%F"`"
+        essid=$(iwconfig wlp3s0 | awk -F '"' '/ESSID/ {print $2}')
+        strength=$(nmcli -t -f active,ssid,signal dev wifi|grep yes|cut -d':' -f3)
+        vpn_state=$(nmcli | grep "tun0: connected to tun0")
+        doy=$(date "+%j")
+        date=$(date "+%F")
     fi
-    ti="`date "+%I:%M %p"`"
-    vol="`amixer -D pulse get Master | grep Left: | cut -d '[' -f2 | cut -d ']' -f1`"
-    mute="`amixer -D pulse get Master | grep Left: | cut -d '[' -f3 | cut -d ']' -f1`"
-    bat="`upower -i $(upower -e | grep 'BAT') | grep -E "percentage" | cut -d':' -f2 | sed 's/ //g'`"
+    ti=$(date "+%I:%M %p")
+    vol=$(amixer -D pulse get Master | grep Left: | cut -d '[' -f2 | cut -d ']' -f1)
+    mute=$(amixer -D pulse get Master | grep Left: | cut -d '[' -f3 | cut -d ']' -f1)
+    bat=$(upower -i $(upower -e | grep 'BAT') | grep -E "percentage" | cut -d':' -f2 | sed 's/ //g')
 
     # WIFI:
     printf '{"name":"wifi","color":"#FFFFFF","full_text":"'"$essid"' '"$strength"'%%"},'
